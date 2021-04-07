@@ -37,10 +37,12 @@ class Get_Games:
 
         games_data_set = {}
         for index, game in enumerate(self.locator.findAll('h2', {'class': 'title front-view-title'}), start=1):
+            if game.text == '':
+                break
             for game_link in game.findAll('a'):
                 games_data_set[index] = {game.text : game_link['href']}
                 print(f'{index} : {game.text}')
-                
+
         while True:
             game_selection = int(input('\n\nEnter the Index of the game you want to download: '))
             if not game_selection in games_data_set:
